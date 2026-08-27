@@ -5,23 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brasil a saga do hexa</title>
     <style>
+      /* Variáveis de cor: Tema Claro (Padrão) */
+      :root {
+        --cor-bg-body: #002776;
+        --cor-header-bg: #009B3A;
+        --cor-header-borda: #FEDF00;
+        --cor-header-texto: #FEDF00;
+        --cor-header-sub: #FFFFFF;
+        --cor-main-bg: #FFFFFF;
+        --cor-texto: #222222;
+        --cor-autor: #002776;
+        --cor-borda: #009B3A;
+        --cor-btn-bg: #FEDF00;
+        --cor-btn-texto: #002776;
+        --cor-btn-borda: #009B3A;
+        --cor-btn-hover-bg: #009B3A;
+        --cor-btn-hover-texto: #FEDF00;
+      }
+
+      /* Variáveis de cor: Tema Escuro (Modo Secundário de alta legibilidade) */
+      body.modo-escuro {
+        --cor-bg-body: #0a0e1a;
+        --cor-header-bg: #071c0d;
+        --cor-header-borda: #1b4d27;
+        --cor-header-texto: #ffe600;
+        --cor-header-sub: #e6edf3;
+        --cor-main-bg: #161b22;
+        --cor-texto: #e6edf3;
+        --cor-autor: #58a6ff;
+        --cor-borda: #238636;
+        --cor-btn-bg: #1f6feb;
+        --cor-btn-texto: #ffffff;
+        --cor-btn-borda: #58a6ff;
+        --cor-btn-hover-bg: #388bfd;
+        --cor-btn-hover-texto: #ffffff;
+      }
+
       body {
-        background-color: #002776;
+        background-color: var(--cor-bg-body);
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px 10px;
+        transition: background-color 0.3s ease;
       }
 
       header {
-        background-color: #009B3A; /* Verde do Brasil */
-        color: #FEDF00; /* Amarelo do Brasil */
+        background-color: var(--cor-header-bg);
+        color: var(--cor-header-texto);
         text-align: center;
         max-width: 800px;
         margin: 0 auto;
         padding: 20px;
-        border: 4px solid #FEDF00;
+        border: 4px solid var(--cor-header-borda);
         border-radius: 12px 12px 0 0;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
       }
 
       header h1 {
@@ -29,23 +67,24 @@
       }
 
       header p {
-        color: #FFFFFF;
+        color: var(--cor-header-sub);
         font-weight: bold;
         margin-bottom: 0;
       }
 
       main { 
-        background-color: #FFFFFF; /* Branco */
-        color: #222222;
+        background-color: var(--cor-main-bg);
+        color: var(--cor-texto);
         max-width: 800px;
         margin: 0 auto;
         padding: 24px;
         border-radius: 0 0 12px 12px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
       }
 
       article {
-        border-left: 6px solid #009B3A; /* Faixa lateral verde */
+        border-left: 6px solid var(--cor-borda);
         padding-left: 16px;
         margin-bottom: 32px;
       }
@@ -58,7 +97,7 @@
       }
 
       .artigo-autor {
-        color: #002776; /* Azul */
+        color: var(--cor-autor);
         font-weight: bold;
         font-size: 0.9em;
       }
@@ -68,30 +107,37 @@
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
-        background-color: #FEDF00; /* Amarelo */
-        color: #002776; /* Azul */
-        border: 2px solid #009B3A; /* Verde */
+        background-color: var(--cor-btn-bg);
+        color: var(--cor-btn-texto);
+        border: 2px solid var(--cor-btn-borda);
         border-radius: 20px;
         margin-right: 8px;
         transition: all 0.2s ease-in-out;
       }
 
       button:hover {
-        background-color: #009B3A; /* Inverte para Verde no hover */
-        color: #FEDF00; /* Texto Amarelo */
+        background-color: var(--cor-btn-hover-bg);
+        color: var(--cor-btn-hover-texto);
       }
 
-      /* Estilo da seção do link promocional */
+      .btn-toggle-tema {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      }
+
       .link-camisa {
         text-align: center;
         margin-top: 30px;
         padding-top: 20px;
-        border-top: 2px dashed #009B3A;
+        border-top: 2px dashed var(--cor-borda);
       }
 
       .link-camisa a {
         display: inline-block;
-        background-color: #009B3A;
+        background-color: var(--cor-borda);
         color: #FFFFFF;
         padding: 14px 28px;
         border-radius: 30px;
@@ -103,13 +149,40 @@
       }
 
       .link-camisa a:hover {
-        background-color: #002776;
-        color: #FEDF00;
+        background-color: var(--cor-bg-body);
+        color: var(--cor-header-texto);
         transform: translateY(-2px);
+      }
+
+      /* Estilo da Seção de Créditos */
+      footer {
+        background-color: var(--cor-main-bg);
+        color: var(--cor-texto);
+        max-width: 800px;
+        margin: 20px auto 0 auto;
+        padding: 20px 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        font-size: 0.9em;
+        transition: all 0.3s ease;
+      }
+
+      footer h3 {
+        margin-top: 0;
+        color: var(--cor-autor);
+        font-size: 1.1em;
+      }
+
+      footer ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+        line-height: 1.6;
       }
     </style>
   </head>
   <body>
+    <button id="toggle-tema" class="btn-toggle-tema">🌙 Modo Escuro</button>
+
     <header>
       <h1>A história do Brasil na Copa do Mundo!</h1>
       <p>A incrível evolução de um pentacampeão</p>
@@ -133,8 +206,8 @@
           <h2>🇸🇪 1958 — O Primeiro Título (Suécia)</h2>
           <p class="artigo-autor">Por: Davi Almeida</p>
           <p>A Copa do Mundo de 1958, realizada na Suécia, consagrou o Brasil como campeão mundial pela primeira vez. O torneio marcou a entrada em cena de lendas como Garrincha e do jovem Pelé (com apenas 17 anos), que transformaram a história do futebol brasileiro e garantiram o título com uma vitória por 5 a 2 sobre a Suécia na final.</p>
-          <button>🇧🇷 <span>0</span></button>
-          <button>🥇 <span>0</span></button>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🥇 <span>0</span></button>
         </div>
       </article>
 
@@ -145,8 +218,8 @@
           <h2>🇨🇱 1962 — O Bicampeonato (Chile)</h2>
           <p class="artigo-autor">Por: Davi Almeida</p>
           <p>A Copa do Mundo de 1962, realizada no Chile, consagrou o Brasil bicampeão mundial. O torneio ficou marcado pela grave lesão de Pelé logo no início, pela espetacular atuação de Garrincha assumindo o protagonismo, e pela vitória de 3 a 1 sobre a Tchecoslováquia na grande final.</p>
-          <button>🇧🇷 <span>0</span></button>
-          <button>🥇 <span>0</span></button>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🥇 <span>0</span></button>
         </div>
       </article>
 
@@ -156,9 +229,9 @@
         <div>
           <h2>🇲🇽 1970 — O Tri Inesquecível (México)</h2>
           <p class="artigo-autor">Por: Davi Almeida</p>
-          <p>A Copa do Mundo de 1970, realizada no México, foi vencida pelo Brasil, que conquistou o tricampeonato mundial com uma das maiores seleções da história do futebol, com 5 camisas 10 no time! A equipe venceu todos os seus seis jogos na competição, apresentando um futebol ofensivo e encantador. O torneio também ficou marcado como o primeiro a ser transmitido ao vivo e em cores pela televisão.</p>
-          <button>🇧🇷 <span>0</span></button>
-          <button>🥇 <span>0</span></button>
+          <p>A Copa do Mundo de 1970, realizada no México, foi vencida pelo Brasil, que conquistou o tricampeonato mundial com uma das maiores seleções da história do futebol, com 5 camisas 10 no time! A equipe venceu todos os seus seis jogos na competição, apresentando um futebol ofensivo e encantador.</p>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🥇 <span>0</span></button>
         </div>
       </article>
 
@@ -168,9 +241,9 @@
         <div>
           <h2>🇺🇸 1994 — O Tetra (Estados Unidos)</h2>
           <p class="artigo-autor">Por: Davi Almeida</p>
-          <p>A Copa do Mundo FIFA de 1994 foi a 15.ª edição do torneio, sediado nos Estados Unidos, sendo o primeiro mundial a ser realizado neste país. Apesar da pouca tradição norte-americana no futebol, foi este o campeonato mundial que bateu todos os recordes de público, mantidos até os dias de hoje, consagrando o Brasil como tetracampeão mundial após um jejum de 24 anos.</p>
-          <button>🇧🇷 <span>0</span></button>
-          <button>🥇 <span>0</span></button>
+          <p>A Copa do Mundo de 1994 consagrou o Brasil tetracampeão após 24 anos de jejum. Sob a liderança da dupla Romário e Bebeto, além da solidez de Dunga e Taffarel, a Seleção venceu a Itália em uma disputa nos pênaltis marcante.</p>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🥇 <span>0</span></button>
         </div>
       </article>
 
@@ -180,13 +253,95 @@
         <div>
           <h2>🇰🇷🇯🇵 2002 — O Penta (Coreia do Sul e Japão)</h2>
           <p class="artigo-autor">Por: Davi Almeida</p>
-          <p>A Copa do Mundo FIFA de 2002, sediada em conjunto por Coreia do Sul e Japão, foi a primeira edição asiática e do século XXI. O Brasil sagrou-se pentacampeão de forma invicta sob o comando de Felipão, vencendo a Alemanha por 2 a 0 na final com dois gols de Ronaldo Fenômeno fazendo um gol lendário no temível Oliver Kahn.</p>
-          <button>🇧🇷 <span>0</span></button>
-          <button>🥇 <span>0</span></button>
+          <p>Com o trio "Rivaldo, Ronaldinho e Ronaldo" voando, o Brasil conquistou o Pentacampeonato de forma invicta. Ronaldo Fenômeno superou graves lesões para ser o artilheiro do torneio, marcando os dois gols da vitória na final contra a Alemanha.</p>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🥇 <span>0</span></button>
         </div>
       </article>
 
-      <!-- Seção com o link adicionado -->
+      <!-- NOVO POST: A Busca Pelo Hexa Detalhada -->
+      <article>
+        <img src="815251.webp" alt="Trajetória na busca pelo Hexacampeonato">
+        <div>
+          <h2>🔍 As Etapas da Busca Pelo Hexa (2006 – 2022)</h2>
+          <p class="artigo-autor">Por: Davi Almeida</p>
+          <p>Desde a conquista em Yokohama, a Seleção viveu momentos de grande expectativa e fortes desilusões em mata-matas decisivos:</p>
+          <ul>
+            <li><strong>🇩🇪 2006 (Alemanha):</strong> Chegando como grande favorita com o "Quadrado Mágico" (Ronaldo, Ronaldinho, Adriano e Kaká), a Seleção parou no talento de Zidane e foi eliminada nas quartas pela França (1x0).</li>
+            <li><strong>🇿🇦 2010 (África do Sul):</strong> Sob o comando de Dunga, o Brasil fez uma fase de grupos consistente e goleou o Chile nas oitavas, mas sofreu uma virada dolorosa contra a Holanda (2x1) nas quartas.</li>
+            <li><strong>🇧🇷 2014 (Brasil):</strong> A Copa em casa trouxe a comoção da lesão de Neymar contra a Colômbia e a histórica queda na semifinal contra a Alemanha.</li>
+            <li><strong>🇷🇺 2018 (Rússia):</strong> Com Tite no comando e grande solidez tática, o Brasil fez boa campanha, mas esbarrou no contra-ataque letal da Bélgica (2x1) nas quartas de final.</li>
+            <li><strong>🇶🇦 2022 (Catar):</strong> Após abrir o placar na prorrogação com um golaço de Neymar, o Brasil cedeu o empate no fim e caiu nas penalidades diante da Croácia.</li>
+          </ul>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">⌛ <span>0</span></button>
+        </div>
+      </article>
+
+      <!-- Post 2026 -->
+      <article>
+        <img src="Copa-do-Mundo-2026-Divulgacao-1.jpg" alt="Seleção Brasileira na Copa de 2026">
+        <div>
+          <h2>🇨🇦🇲🇽🇺🇸 2026 — A Zebra Contra a Noruega</h2>
+          <p class="artigo-autor">Por: Davi Almeida</p>
+          <p>Na Copa do Mundo de 2026, a Seleção Brasileira vivenciou mais um capítulo amargo em sua trajetória no torneio. Em um confronto surpreendente e bastante disputado, o Brasil acabou superado pela seleção da Noruega, adiando novamente o sonho do Hexacampeonato mundial.</p>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">🇳🇴 <span>0</span></button>
+        </div>
+      </article>
+
+      <!-- NOVO POST: Lendas dos Anos 80 e 90 -->
+      <article>
+        <img src="images (5).jpeg" alt="Lendas da Seleção Brasileira">
+        <div>
+          <h2>✨ A Magia dos Anos 70, 80 e 90</h2>
+          <p class="artigo-autor">Por: Davi Almeida</p>
+          <p>Nem só de títulos se constrói a grandeza de uma seleção. Diversos craques encantaram o planeta com exibições inesquecíveis:</p>
+          <ul>
+            <li><strong>Sócrates:</strong> O "Doutor", símbolo de inteligência, elegância no meio-campo e da memorável Seleção de 1982.</li>
+            <li><strong>Falcão:</strong> O "Rei de Roma", um dos meio-campistas mais completos e refinados da história do futebol mundial.</li>
+            <li><strong>Taffarel:</strong> "Sai que é sua, Taffarel!" — Herói nas disputas de pênaltis em 1994 e 1998, sinônimo de segurança no gol.</li>
+            <li><strong>Rivaldo:</strong> O camisa 10 decisivo do Penta, fundamental nas viradas de 2002 e eleito melhor do mundo em 1999.</li>
+            <li><strong>Cafu e Roberto Carlos:</strong> A dupla de laterais mais icônica da história, combinando velocidade, força e títulos.</li>
+          </ul>
+          <button class="btn-curtir">⚽ <span>0</span></button>
+          <button class="btn-curtir">👑 <span>0</span></button>
+        </div>
+      </article>
+
+      <!-- Post Os Maiores Craques -->
+      <article>
+        <img src="1664764911947-page-0001.webp" alt="Maiores craques do futebol brasileiro">
+        <div>
+          <h2>👑 Os Maiores Craques do Brasil</h2>
+          <p class="artigo-autor">Por: Davi Almeida</p>
+          <p>A Amarelinha foi vestida por alguns dos maiores gênios do esporte mundial. Impossível falar de Seleção sem citar nomes lendários:</p>
+          <ul>
+            <li><strong>Pelé:</strong> O Rei do Futebol, único jogador a vencer 3 Copas do Mundo (1958, 1962, 1970).</li>
+            <li><strong>Garrincha:</strong> O "Anjo das Pernas Tortas", herói do bicampeonato em 1962.</li>
+            <li><strong>Zico:</strong> O Galinho de Quintino, maestro e um dos maiores camisas 10 da história.</li>
+            <li><strong>Romário:</strong> O "Baixinho", decisivo e protagonista absoluto da conquista do Tetra em 94.</li>
+            <li><strong>Ronaldo Fenômeno:</strong> Artilheiro inesquecível, superou lesões para decidir a Copa de 2002.</li>
+            <li><strong>Ronaldinho Gaúcho:</strong> O "Bruxo", que encantou o mundo com sua magia e dribles imprevisíveis.</li>
+            <li><strong>Kaká:</strong> Último brasileiro eleito melhor do mundo antes da era de protagonismos atuais, dono de uma arrancada devastadora.</li>
+          </ul>
+          <button class="btn-curtir">🇧🇷 <span>0</span></button>
+          <button class="btn-curtir">⭐ <span>0</span></button>
+        </div>
+      </article>
+
+      <!-- Post Neymar Jr. -->
+      <article>
+        <img src="images (4).jpeg" alt="Neymar Jr. jogando pela Seleção Brasileira em Copas do Mundo">
+        <div>
+          <h2>🔟 Neymar Jr. — A Trajetória nas Copas do Mundo</h2>
+          <p class="artigo-autor">Por: Davi Almeida</p>
+          <p>Neymar Jr. é o grande protagonista da Seleção Brasileira no século XXI quando o assunto é Copa do Mundo. Em 2014, jogando em casa, foi o grande destaque da equipe até sofrer uma grave lesão nas costas nas quartas de final contra a Colômbia. Em 2018, na Rússia, retornou de lesão para liderar o ataque brasileiro na campanha até as quartas. Na Copa do Catar em 2022, marcou um antológico gol contra a Croácia, igualando a marca histórica de Pelé como o maior artilheiro da história da Seleção Amarelinha em jogos oficiais.</p>
+          <button class="btn-curtir">🔟 <span>0</span></button>
+          <button class="btn-curtir">⚽ <span>0</span></button>
+        </div>
+      </article>
+
       <div class="link-camisa">
         <a href="https://www.nike.com.br/camisa-brasil-jordan-ii-2026-27-jogador-masculina-097619.html?cor=15" target="_blank" rel="noopener noreferrer">
           👕 Garanta a Nova Camisa do Brasil!
@@ -194,10 +349,25 @@
       </div>
     </main>
 
-    <script>
-      const botoes = document.querySelectorAll("button");
+    <!-- Rodapé com os Créditos das Imagens -->
+    <footer>
+      <h3>📷 Créditos das Imagens</h3>
+      <ul>
+        <li><strong>Comemoração Seleção:</strong> Arquivo CBF / Divulgação</li>
+        <li><strong>Pelé (1958 & 1970):</strong> Arquivo Histórico FIFA / CBF</li>
+        <li><strong>Copa de 1962 (Chile):</strong> Arquivo Histórico FIFA</li>
+        <li><strong>Romário (1994):</strong> Divulgação / CBF</li>
+        <li><strong>Comemoração do Penta (2002):</strong> Divulgação / CBF</li>
+        <li><strong>Busca pelo Hexa & Lendas:</strong> Acervo Esportivo / Divulgação</li>
+        <li><strong>Copa do Mundo 2026:</strong> Divulgação Oficial FIFA</li>
+        <li><strong>Maiores Craques & Neymar Jr.:</strong> Divulgação / CBF</li>
+      </ul>
+    </footer>
 
-      botoes.forEach(function(botao) {
+    <script>
+      const botoesCurtir = document.querySelectorAll(".btn-curtir");
+
+      botoesCurtir.forEach(function(botao) {
         let curtiu = false;
 
         botao.addEventListener("click", function() {
@@ -212,6 +382,18 @@
             curtiu = false;
           }
         });
+      });
+
+      const btnTema = document.getElementById("toggle-tema");
+
+      btnTema.addEventListener("click", function() {
+        document.body.classList.toggle("modo-escuro");
+
+        if (document.body.classList.contains("modo-escuro")) {
+          btnTema.textContent = "☀️ Modo Claro";
+        } else {
+          btnTema.textContent = "🌙 Modo Escuro";
+        }
       });
     </script>
   </body>
